@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("tokens.css");
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: Work Sans, sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: Noto Serif, serif;
+}
+
+h2, h3 {
+    color: var(--color-heading);
+}
+
+h1 {
+    margin-left: 2vw;
+}
+
+article {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2vw;
+    justify-content: space-evenly;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    background-color: var(--color-header);
+    color: var(--color-heading-text);
+    margin-bottom: 5vw;
+}
+
+img {
+    max-width: 35vw;
+    border-radius: 50%;
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+#ret-home, #places {
+    margin-left: 2vw;
+}
+
+#contacts {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+}
