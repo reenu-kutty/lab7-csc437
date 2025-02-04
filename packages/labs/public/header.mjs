@@ -7,6 +7,10 @@ const toHTMLChunk = toHtml(`<header id="my-header">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="places.html">Places I've been</a>
     </div>
+    <label>
+        <input id="dark-mode-checkbox" type="checkbox" autocomplete="off" />
+        Dark mode
+    </label>
     <button class="menu-btn">Menu</button>
     </header>`
 )
@@ -22,6 +26,7 @@ class YourElementName extends HTMLElement {
         const menuButton = this.shadowRoot.querySelector(".menu-btn");
         const linkHolder = this.shadowRoot.querySelector("#link-holder");
         const header = this.shadowRoot.querySelector("#my-header");
+        const darkModeCheckbox = this.shadowRoot.querySelector("#dark-mode-checkbox");
 
 
         menuButton.addEventListener("click", () => {
@@ -50,6 +55,19 @@ class YourElementName extends HTMLElement {
                 console.log("Active link:", link.getAttribute("href"));
             }
         });
+
+        const savedDarkMode = localStorage.getItem("dark-mode") === "true";
+
+        if (savedDarkMode) {
+            document.body.classList.add("dark-mode");
+            darkModeCheckbox.checked = true;
+        }
+
+        darkModeCheckbox.addEventListener("change", (event) => {
+            const isDarkMode = event.target.checked;
+            document.body.classList.toggle("dark-mode", isDarkMode);
+            localStorage.setItem("dark-mode", isDarkMode);
+        });
     }
 }
 
@@ -73,6 +91,9 @@ TEMPLATE.innerHTML = `<style>
       margin-left: 2vw;
       margin-bottom: 8vh;
     }
+    label {
+    
+    }
     header.open {
         display: flex;
         flex-direction: column;
@@ -81,6 +102,9 @@ TEMPLATE.innerHTML = `<style>
     .nav-link.active {
         color: var(--color-current);
         font-weight: bold;
+    }
+    .nav-link {
+        color: var(--color-heading);
     }
     h1 {
         font-family: Noto Serif, serif;

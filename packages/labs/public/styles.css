@@ -61,3 +61,6 @@ img {
     font-weight: bold;
     border-bottom: 2px solid var(--color-current);
 }
+a {
+    color: var(--color-heading);
+}

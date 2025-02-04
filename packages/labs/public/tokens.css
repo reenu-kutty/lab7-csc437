@@ -6,3 +6,12 @@
     --color-heading-text: #362247;
     --color-current: #fcedff;
 }
+
+body.dark-mode {
+    --color-header: #393442;
+    --color-background: #000000;
+    --color-text: #bfc4ff;
+    --color-heading: #ef90f6;
+    --color-heading-text: #c17afd;
+    --color-current: #fcedff;
+}
