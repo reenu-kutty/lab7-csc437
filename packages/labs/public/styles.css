@@ -55,3 +55,9 @@ img {
     display: grid;
     grid-template-columns: 0.3fr 1fr;
 }
+
+.nav-link.active {
+    color: var(--color-current);
+    font-weight: bold;
+    border-bottom: 2px solid var(--color-current);
+}
