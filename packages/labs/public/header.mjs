@@ -87,7 +87,7 @@ TEMPLATE.innerHTML = `<style>
       flex-direction: row;
       gap: 2vw;
       align-items: center;
-      margin-top: auto;
+      margin-top: 5vh;
       margin-left: 2vw;
       margin-bottom: 8vh;
     }
