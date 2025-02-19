@@ -5,9 +5,9 @@ function Todo(props) {
     return (
         <li className="mt-2">
             <label>
-                <input id={ props.id } type="checkbox"/>{ props.name }
+                <input onChange={() => props.toggleTaskCompleted(props.id)} id={ props.id } type="checkbox"/>{ props.name }
             </label>
-            <button className="ml-8 text-gray-500"><FontAwesomeIcon title="delete" icon={faTrashCan}/></button>
+            <button onClick={() => props.deleteTask(props.id)} className="ml-8 text-gray-500"><FontAwesomeIcon title="delete" icon={faTrashCan}/></button>
         </li>
     )
 }
