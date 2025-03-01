@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { Spinner } from "./Spinner.jsx";
 import { groceryFetcher } from "./groceryFetcher"
+import {useGroceryFetch} from "./useGroceryFetch.js";
 
 const MDN_URL = "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json";
 
@@ -10,13 +11,11 @@ const MDN_URL = "https://mdn.github.io/learning-area/javascript/apis/fetching-da
  * @param {number} ms the number of milliseconds to delay
  * @returns {Promise<undefined>} a promise that resolves with the value of `undefined` after the specified delay
  */
-function delayMs(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 export function GroceryPanel(props) {
-    const [groceryData, setGroceryData] = React.useState([]);
     const [dataSource, setDataSource] = React.useState("MDN");
+
+    const { groceryData, isLoading, error } = useGroceryFetch(dataSource)
 
     function handleAddTodoClicked(item) {
         const todoName = `Buy ${item.name} (${item.price.toFixed(2)})`;
@@ -26,43 +25,6 @@ export function GroceryPanel(props) {
     async function handleDropdownChange(changeEvent) {
         setDataSource(changeEvent.target.value);
     }
-
-    useEffect(() => {
-        let isStale = false;
-
-        async function fetchGroceryData(url) {
-            props.setIsLoading(true);
-            setGroceryData([])
-            props.setError(null)
-
-            if (!url) {
-                props.setIsLoading(false);
-                return;
-            }
-            try {
-                const response = await groceryFetcher.fetch(url);
-                if(!isStale) {
-                    setGroceryData(response);
-                }
-            } catch (err) {
-                if(!isStale) {
-                    props.setError(err.message);
-                }
-            } finally {
-                if(!isStale) {
-                    props.setIsLoading(false);
-                }
-            }
-        }
-
-        if(!isStale) {
-            fetchGroceryData(dataSource);
-        }
-
-        return () => {
-            isStale = true;
-        }
-    }, [dataSource]);
 
     return (
         <div>
@@ -77,8 +39,8 @@ export function GroceryPanel(props) {
                         <option value="whoknows">Who knows?</option>
                     </select>
                 </label>
-                <Spinny isLoading={props.isLoading} />
-                <Error error={props.error}/>
+                <Spinny isLoading={isLoading} />
+                <Error error={error}/>
             </div>
 
             {
@@ -135,5 +97,5 @@ function Spinny(props) {
 }
 
 function Error(props) {
-    return props.error ? <div className="text-red-500">{props.error}</div>: null;
+    return props.error ? <div className="text-red-500">{error}</div>: null;
 }

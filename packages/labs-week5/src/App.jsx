@@ -10,8 +10,6 @@ function App(props) {
     // eslint-disable-next-line react/prop-types
     const [taskList, setTaskList] = React.useState(props.tasks);
     const [modalOpen, setModalOpen] = React.useState(false);
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [error, setError] = React.useState(null);
 
     function addTask(name) {
         const newTask = { id: `todo-${nanoid()}`, name: name};
@@ -49,7 +47,7 @@ function App(props) {
                 </ul>
             </section>
             <Modal isOpen={modalOpen} onCloseRequested={() => setModalOpen(false)} headerLabel="New Task"><AddTaskForm onNewTask={addTask}/></Modal>
-            <GroceryPanel error={error} setError={setError} isLoading={isLoading} setIsLoading={setIsLoading} addTask={addTask}/>
+            <GroceryPanel addTask={addTask}/>
         </main>
     );
 }
