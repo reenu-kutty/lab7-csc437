@@ -1,5 +1,6 @@
-import React from "react";
-import {Spinner} from "./Spinner.jsx";
+import React, {useEffect} from "react";
+import { Spinner } from "./Spinner.jsx";
+import { groceryFetcher } from "./groceryFetcher"
 
 const MDN_URL = "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json";
 
@@ -15,6 +16,7 @@ function delayMs(ms) {
 
 export function GroceryPanel(props) {
     const [groceryData, setGroceryData] = React.useState([]);
+    const [dataSource, setDataSource] = React.useState("MDN");
 
     function handleAddTodoClicked(item) {
         const todoName = `Buy ${item.name} (${item.price.toFixed(2)})`;
@@ -22,31 +24,45 @@ export function GroceryPanel(props) {
     }
 
     async function handleDropdownChange(changeEvent) {
-        props.setIsLoading(true);
-        const url = changeEvent.target.value;
-        setGroceryData([])
-        props.setError(null)
-
-        if (!url) {
-            props.setIsLoading(false);
-            return;
-        }
-        await delayMs(2000);
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error("Failed to fetch data");
-            }
-            const data = await response.json();
-            setGroceryData(data);
-        } catch (err) {
-            props.setError(err.message);
-        } finally {
-            props.setIsLoading(false);
-        }
-
+        setDataSource(changeEvent.target.value);
     }
+
+    useEffect(() => {
+        let isStale = false;
+
+        async function fetchGroceryData(url) {
+            props.setIsLoading(true);
+            setGroceryData([])
+            props.setError(null)
+
+            if (!url) {
+                props.setIsLoading(false);
+                return;
+            }
+            try {
+                const response = await groceryFetcher.fetch(url);
+                if(!isStale) {
+                    setGroceryData(response);
+                }
+            } catch (err) {
+                if(!isStale) {
+                    props.setError(err.message);
+                }
+            } finally {
+                if(!isStale) {
+                    props.setIsLoading(false);
+                }
+            }
+        }
+
+        if(!isStale) {
+            fetchGroceryData(dataSource);
+        }
+
+        return () => {
+            isStale = true;
+        }
+    }, [dataSource]);
 
     return (
         <div>
@@ -54,10 +70,11 @@ export function GroceryPanel(props) {
             <div className="flex flex-row">
                 <label className="mb-4 flex gap-4 pr-4">
                     Get prices from:
-                    <select onChange={handleDropdownChange} disabled={props.isLoading} className="border border-gray-300 p-1 rounded-sm disabled:opacity-50">
-                        <option value="">(None selected)</option>
-                        <option value={MDN_URL}>MDN</option>
-                        <option value="invalid">Who knows?</option>
+                    <select value={dataSource} onChange={handleDropdownChange} className="border border-gray-300 p-1 rounded-sm disabled:opacity-50">
+                        <option value="MDN">MDN</option>
+                        <option value="Liquor store">Liquor store</option>
+                        <option value="Butcher">Butcher</option>
+                        <option value="whoknows">Who knows?</option>
                     </select>
                 </label>
                 <Spinny isLoading={props.isLoading} />
