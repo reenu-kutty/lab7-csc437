@@ -2,13 +2,13 @@ import { MainLayout } from "../MainLayout.jsx";
 import { useImageFetching } from "./useImageFetching.js";
 import {useParams} from "react-router";
 
-export function ImageDetails() {
+export function ImageDetails({authToken}) {
     const { imageId } = useParams()
-    const { isLoading, fetchedImages } = useImageFetching(imageId, 500);
+    const { isLoading, fetchedImages } = useImageFetching(authToken);
     if (isLoading) {
         return <>Loading...</>;
     }
-    const imageData = fetchedImages[0];
+    const imageData = fetchedImages.find(image => image._id === imageId);
     if (!imageData) {
         return <><h2>Image not found</h2></>;
     }

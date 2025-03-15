@@ -5,8 +5,8 @@ import {Link} from "react-router";
 
 export function ImageGallery(props) {
     const imageElements = props.fetchedImages.map((image) => (
-        <div key={image.id} className="ImageGallery-photo-container">
-            <Link to={`/images/${image.id}`}>
+        <div key={image._id} className="ImageGallery-photo-container">
+            <Link to={`/images/${image._id}`}>
                 <img src={image.src} alt={image.name} />
             </Link>
         </div>
