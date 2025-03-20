@@ -5,6 +5,7 @@ import {registerEntryRoutes} from "./routes/entries";
 
 dotenv.config(); // Read the .env file in the current working directory, and load values into process.env.
 const PORT = process.env.PORT || 3000;
+const staticDir = process.env.STATIC_DIR || "public";
 setUpServer().then(r => console.log('finished running!'))
 
 async function setUpServer() {
@@ -26,6 +27,8 @@ async function setUpServer() {
     console.log(collectionInfos.map(collectionInfo => collectionInfo.name)); // For debug only
 
     const app = express();
+
+    app.use(express.static(staticDir));
 
     app.use(express.json());
 
