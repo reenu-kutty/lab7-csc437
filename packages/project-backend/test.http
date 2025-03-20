@@ -1,0 +1,7 @@
+### This is a comment
+GET http://localhost:3000/api/entries/fakeuser/03-15-2003
+Content-Type: application/json
+
+### This is a comment
+POST http://localhost:3000/api/entries/fakeuser/01-15-2003
+Content-Type: application/json
