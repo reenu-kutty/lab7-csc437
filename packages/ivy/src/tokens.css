@@ -1,0 +1,33 @@
+:root {
+    --color-header: #e0f4d4;
+    --color-background: #d5d8ff;
+    --color-text: black;
+    --color-heading: #613485;
+    --color-heading-text: #362247;
+    --color-current: #fcedff;
+    --color-logo: #3b5923;
+    --color-button: #c0c0fa;
+    --color-button-focus: #ffffff;
+    --color-calendar-square: white;
+    --color-shade: #dbeadd;
+    --color-more-shade: #abbdaf;
+    --color-border: #abdab7;
+    --color-curr-day: #c45dff;
+}
+
+body.dark-mode {
+    --color-header: #425537;
+    --color-background: #313032;
+    --color-text: #c5c9da;
+    --color-heading: #b680e4;
+    --color-heading-text: #362247;
+    --color-current: #fcedff;
+    --color-logo: #ddf3ce;
+    --color-button: #83a68d;
+    --color-button-focus: #334a3b;
+    --color-calendar-square: #695f6a;
+    --color-shade: #4c4e4c;
+    --color-more-shade: #abbdaf;
+    --color-border: #2f4232;
+    --color-curr-day: #ff5bd9;
+}

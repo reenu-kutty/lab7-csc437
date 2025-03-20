@@ -1,0 +1,31 @@
+
+article {
+    margin-top: 8vh;
+    left: 0;
+    margin-left: 3vw;
+}
+
+#dayview-header h1 {
+    font-size: 3em;
+}
+
+#dayview-header {
+    color: var(--color-heading);
+    margin-top: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+textarea {
+    width: 90vw;
+    height: 10vh;
+}
+
+#dayview-content button {
+    margin-top: 4vh;
+    margin-bottom: 6vh;
+    width: 10vw;
+}

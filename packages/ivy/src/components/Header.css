@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+header {
+    font-family: Caveat, sans-serif;
+    font-size: 5vh;
+    background-color: var(--color-header);
+    color: var(--color-logo);
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 8vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    padding-left: 2vw;
+    box-sizing: border-box;
+
+    border-bottom: 2px solid var(--color-more-shade);
+}
+
+header button {
+    margin-right: 6vw;
+    width: 8vw;
+}
+
